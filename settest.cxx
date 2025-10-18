@@ -55,14 +55,8 @@ int main(void) {
                 break;
 
             case SIZE:
-                try {
                     //Call the size method on the 'set' object
                     cout << "Current Size: " << set.size() << endl; 
-                } catch (const exception &e) {
-                    //The size function shouldn't throw, but keep the try-catch for robustness
-                    std::cerr << "Caught exception: " << e.what() << endl;               
-                    throw std::runtime_error("Error getting size.");
-                }
                 break;
 
             case PRINT:

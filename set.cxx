@@ -35,7 +35,7 @@ namespace csen79 {
         operator=(rhs);
     }    
 
-    // Move Assignment
+    // Move operator
     Set &Set::operator=(Set &&rhs) {
         if (this == &rhs) return *this;
         delete[] data;

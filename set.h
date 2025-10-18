@@ -16,7 +16,7 @@ public:
     Set(): data{0}, count{0} {}
 
     // rule of 5
-    ~Set() = default;
+    ~Set();
     Set(const Set &);
     Set(Set &&);
     Set &operator=(const Set &);
