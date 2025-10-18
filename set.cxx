@@ -18,14 +18,16 @@ namespace csen79 {
 
     // assignment
     Set &Set::operator=(const Set &rhs) {
-        memcpy(data, rhs.data, DATASIZE);
+        memcpy(data, rhs.data, DATASIZE*sizeof(Data));
         count = rhs.count;
         return *this;
     }
 
-    // move constructor
-    Set::Set(Set &&rhs) {
-        operator=(rhs);
+    // Move constructor
+    Set::Set(Set &&rhs) : data(rhs.data), count(rhs.count), DATASIZE(rhs.DATASIZE) {
+        rhs.data = nullptr;
+        rhs.count = 0;
+        rhs.DATASIZE = 0;
     }    
 
     // copy constructor
@@ -33,11 +35,22 @@ namespace csen79 {
         operator=(rhs);
     }    
 
-    // move
+    // Move Assignment
     Set &Set::operator=(Set &&rhs) {
-        return operator=(rhs);
+        if (this == &rhs) return *this;
+        delete[] data;
+        data = rhs.data;
+        count = rhs.count;
+        DATASIZE = rhs.DATASIZE;
+        rhs.data = nullptr;
+        rhs.count = 0;
+        rhs.DATASIZE = 0;
+        return *this;
     }
 
+    Set::~Set() {
+        delete[] data;
+    }
 
     //Add data to set if not inside
     void Set::insert(const Data &element) {
@@ -54,7 +67,7 @@ namespace csen79 {
             if (data != nullptr) {
                 Data* temp = new Data[DATASIZE];
                 memcpy(temp, data, count*sizeof(Data));
-                delete data;
+                delete[] data;
                 data = temp;
             } else {
                 data = new Data[DATASIZE];
