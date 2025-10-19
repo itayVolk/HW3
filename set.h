@@ -13,7 +13,7 @@ namespace csen79 {
 class Set {
 public:
     using Data = int;   // create an alias for the data
-    Set(): data{0}, count{0} {}
+    Set(): data{nullptr}, count{0}, DATASIZE{0} {}
 
     // rule of 5
     ~Set();

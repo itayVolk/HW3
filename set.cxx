@@ -18,8 +18,20 @@ namespace csen79 {
 
     // assignment
     Set &Set::operator=(const Set &rhs) {
-        memcpy(data, rhs.data, DATASIZE*sizeof(Data));
+        if (this == &rhs) return *this;  // Self-assignment check
+
+        delete[] data;  // Delete old memory
+
+        DATASIZE = rhs.DATASIZE;
         count = rhs.count;
+
+        if (rhs.data != nullptr) {
+            data = new Data[DATASIZE];  // Allocate new memory
+            memcpy(data, rhs.data, count*sizeof(Data));
+        } else {
+            data = nullptr;
+        }
+
         return *this;
     }
 
@@ -31,7 +43,7 @@ namespace csen79 {
     }    
 
     // copy constructor
-    Set::Set(const Set &rhs) {
+    Set::Set(const Set &rhs) : data{nullptr}, count{0}, DATASIZE{0} {
         operator=(rhs);
     }    
 
@@ -77,7 +89,7 @@ namespace csen79 {
         data[count++] = element; //Insert data and increment
     };
     //Return the number of elements in the set
-    int Set::size() {return 0;};
+    int Set::size() {return count;};
     //Prints the data to cout
     void Set::print() const {
         for (int i = 0; i < count; i++) {
