@@ -12,28 +12,11 @@
 using namespace std;
 
 int main(void) {
-    for (int i = 1; i <= 100; i++) {
-        cout << "P " << i << endl;
+    for (int i = 0; i < 10; i++) {
+        for (int j = 1; j <= 100; j++) {
+            cout << "I " << i*100+j << endl;
+        }
+        cout << "S" << endl << "P" << endl;
     }
-    cout << "D" << endl;
-    for (int i = 101; i <= 1001; i++) {
-        cout << "P " << i << endl;
-    }
-    cout << "D" << endl;
-    for (int i = 0; i < 20; i++) {
-        cout << "O" << endl;
-    }
-    cout << "D" << endl;
-    for (int i = 1002; i <= 1021; i++) {
-        cout << "P " << i << endl;
-    }
-    cout << "D" << endl;
-    for (int i = 0; i < 1001; i++) {
-        cout << "O" << endl;
-    }
-    cout << "D" << endl;
-    for (int i = 1022; i <= 1041; i++) {
-        cout << "P " << i << endl;
-    }
-    cout << "D" << endl << "Q" << endl;
+    cout << "Q" << endl;
 }

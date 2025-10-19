@@ -20,7 +20,8 @@ namespace csen79 {
     Set &Set::operator=(const Set &rhs) {
         if (this == &rhs) return *this;  // Self-assignment check
 
-        delete[] data;  // Delete old memory
+        if (data != nullptr)
+            delete[] data;  // Delete old memory
 
         DATASIZE = rhs.DATASIZE;
         count = rhs.count;
@@ -43,7 +44,7 @@ namespace csen79 {
     }    
 
     // copy constructor
-    Set::Set(const Set &rhs) : data{nullptr}, count{0}, DATASIZE{0} {
+    Set::Set(const Set &rhs) {
         operator=(rhs);
     }    
 
