@@ -15,7 +15,7 @@
 
 using namespace std;
 using namespace csen79;
-enum Command { INSERT = 'I', SIZE = 'S', PRINT = 'P', QUIT = 'Q' };
+enum Command { INSERT = 'I', SIZE = 'S', PRINT = 'P', FAIL = 'F', QUIT = 'Q' };
 
 int main(void) {
     Set set; // The Set object
@@ -49,7 +49,7 @@ int main(void) {
                     set.insert(data);
                 } catch (const exception &e) {
                     // Use a general exception catch for errors during insert (like out of memory)
-                    cerr << e.what() << endl;
+                    cerr << "Insert failed: " << e.what() << endl;
                     continue;
                 }
                 break;
@@ -62,6 +62,10 @@ int main(void) {
             case PRINT:
                 cout << "Printing Set:" << endl;
                 set.print();
+                break;
+
+            case FAIL:
+                cout << "New will now " << (set.toggleFail()?"fail":"succeed") << "." << endl;
                 break;
 
             case QUIT:

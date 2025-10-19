@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <string>
 #include <string.h>
+#include <utility>
 #include "set.h"
 
 namespace csen79 {
@@ -25,6 +26,7 @@ namespace csen79 {
 
         DATASIZE = rhs.DATASIZE;
         count = rhs.count;
+        fail = rhs.fail;
 
         if (rhs.data != nullptr) {
             data = new Data[DATASIZE];  // Allocate new memory
@@ -37,10 +39,8 @@ namespace csen79 {
     }
 
     // Move constructor
-    Set::Set(Set &&rhs) : data(rhs.data), count(rhs.count), DATASIZE(rhs.DATASIZE) {
-        rhs.data = nullptr;
-        rhs.count = 0;
-        rhs.DATASIZE = 0;
+    Set::Set(Set &&rhs) {
+        operator=(std::move(rhs));
     }    
 
     // copy constructor
@@ -55,9 +55,11 @@ namespace csen79 {
         data = rhs.data;
         count = rhs.count;
         DATASIZE = rhs.DATASIZE;
+        fail = rhs.fail;
         rhs.data = nullptr;
         rhs.count = 0;
         rhs.DATASIZE = 0;
+        rhs.fail = fail;
         return *this;
     }
 
@@ -76,15 +78,17 @@ namespace csen79 {
 
         //Increase size if necessary
         if (count == DATASIZE) {
-            DATASIZE += 200;
             if (data != nullptr) {
-                Data* temp = new Data[DATASIZE];
+                if (fail)
+                    throw std::bad_alloc();
+                Data* temp = new Data[DATASIZE+ALLOCSIZE];
                 memcpy(temp, data, count*sizeof(Data));
                 delete[] data;
                 data = temp;
             } else {
-                data = new Data[DATASIZE];
+                data = new Data[DATASIZE+ALLOCSIZE];
             }
+            DATASIZE += ALLOCSIZE;
         }
 
         data[count++] = element; //Insert data and increment
@@ -97,5 +101,10 @@ namespace csen79 {
             std::cout << data[i] << " ";
         }
         std::cout << std::endl;
+    };
+    //Toggles whether new will "fail"
+    bool Set::toggleFail() {
+        fail = !fail;
+        return fail;
     };
 }

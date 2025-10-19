@@ -12,11 +12,19 @@
 using namespace std;
 
 int main(void) {
-    for (int i = 0; i < 10; i++) {
-        for (int j = 1; j <= 100; j++) {
-            cout << "I " << i*100+j << endl;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 1; j <= 200; j++) {
+            cout << "I " << i*200+j << endl;
         }
         cout << "S" << endl << "P" << endl;
     }
-    cout << "Q" << endl;
+    cout << "F" << endl;
+    for (int i = 601; i <= 610; i++) {
+        cout << "I " << i << endl;
+    }
+    cout << "S" << endl << "P" << endl << "F" << endl;
+    for (int i = 611; i <= 800; i++) {
+        cout << "I " << i << endl;
+    }
+    cout << "S" << endl << "P" << endl << "Q" << endl;
 }

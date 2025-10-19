@@ -12,8 +12,9 @@ namespace csen79 {
 
 class Set {
 public:
+    size_t const ALLOCSIZE = 200;
     using Data = int;   // create an alias for the data
-    Set(): data{nullptr}, count{0}, DATASIZE{0} {}
+    Set(): data{nullptr}, count{0}, DATASIZE{0}, fail{false} {}
 
     // rule of 5
     ~Set();
@@ -26,9 +27,11 @@ public:
     void insert(const Data &);
     int size();
     void print() const;
+    bool toggleFail();
 
 private:
     // data storage
+    bool fail;
     int count;
     size_t DATASIZE;    // array size
     Data* data;
