@@ -26,5 +26,9 @@ int main(void) {
     for (int i = 611; i <= 800; i++) {
         cout << "I " << i << endl;
     }
+    cout << "S" << endl << "P" << endl;
+    for (int i = 611; i <= 800; i++) {
+        cout << "I " << i << endl;
+    }
     cout << "S" << endl << "P" << endl << "Q" << endl;
 }
